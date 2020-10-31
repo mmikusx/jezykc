@@ -1,0 +1,43 @@
+#include <complex.h>
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+        complex a=CMPLX(1.0, 2.0);
+        complex b=CMPLX(1.0, 2.0);
+        complex c=CMPLX(1.0, 2.0);
+        complex delta1=CMPLX(1.0, 2.0);
+
+        double xa, xb, xc, ya, yb, yc;
+        double delta, da, db, x1, x2;
+
+        printf("Wspolczynnik a = ");
+        scanf("%lg%lgi", &xa, &ya);
+        printf("Wspolczynnik b = ");
+        scanf("%lg%lgi", &xb, &yb);
+        printf("Wspolczynnik c = ");
+        scanf("%lg%lgi", &xc, &yc);
+
+        a=CMPLX(xa, ya);
+        b=CMPLX(xb, yb);
+        c=CMPLX(xc, yc);
+        delta1=CMPLX(da, db);
+
+        double complex delta2=b*b-4*a*c;
+        double complex z1 = -b;
+        double complex z2 = 2*a;
+        double complex dzielenie = z1 / z2;
+        double complex z3 = -csqrt(delta2);
+        double complex zerowe1 = (z3 * z1) / z2;
+        double complex z4 = csqrt(delta2);
+        double complex zerowe2 = (z4 * z1) / z2;
+
+        if (delta2<0.0+0i)
+                printf("Brak pierwiastkow\n");
+        if (delta2==0.0)
+                printf("Jeden pierwiastek x0 = %g+%gi\n", creal(dzielenie), cimag(dzielenie));
+        if (delta2>0.0+0i)
+                printf("Dwa pierwiastki x1=%g+%gi i x2=%g+%gi\n", creal(zerowe1), cimag(zerowe1), creal(zerowe2), cimag(zerowe2));
+        return 0;
+}
